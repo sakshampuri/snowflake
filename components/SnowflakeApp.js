@@ -165,8 +165,8 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
 					}
 				`}</style>
 				<div style={{ margin: '19px auto 0', width: 142 }}>
-					<a href='https://medium.com/' target='_blank'>
-						<Wordmark />
+					<a href='https://theatom.app' target='_blank'>
+						<h1>Atom</h1>
 					</a>
 				</div>
 				<div style={{ display: 'flex' }}>
