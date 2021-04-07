@@ -5,8 +5,8 @@ import initFirebase from '../services/firebase'
 
 initFirebase()
 
-export default () => (
-	<div>
+const Snowflake = ({}) => (
 		<SnowflakeApp />
-	</div>
 )
+
+export default Snowflake;

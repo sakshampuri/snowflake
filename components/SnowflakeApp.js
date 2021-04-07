@@ -12,7 +12,6 @@ import type { Milestone, MilestoneMap, TrackId } from '../constants'
 import React from 'react'
 import TitleSelector from '../components/TitleSelector'
 
-
 type SnowflakeAppState = {
 	milestoneByTrack: MilestoneMap,
 	name: string,
@@ -79,27 +78,12 @@ const emptyState = (): SnowflakeAppState => {
 	}
 }
 
-const defaultState = (): SnowflakeAppState => {
+const defaultState = (props): SnowflakeAppState => {
 	return {
-		name: 'Cersei Lannister',
+		name: props?.user?.name,
 		title: 'Staff Engineer',
 		milestoneByTrack: {
-			MOBILE: 1,
-			WEB_CLIENT: 2,
-			FOUNDATIONS: 3,
-			SERVERS: 2,
-			PROJECT_MANAGEMENT: 4,
-			COMMUNICATION: 1,
-			CRAFT: 1,
-			INITIATIVE: 4,
-			CAREER_DEVELOPMENT: 3,
-			ORG_DESIGN: 2,
-			WELLBEING: 0,
-			ACCOMPLISHMENT: 4,
-			MENTORSHIP: 2,
-			EVANGELISM: 2,
-			RECRUITING: 3,
-			COMMUNITY: 0,
+			...props?.user?.milestone,
 		},
 		focusedTrackId: 'MOBILE',
 	}
@@ -117,6 +101,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
 	constructor(props: Props) {
 		super(props)
 		this.state = emptyState()
+		this.state.name = props.user.name
 	}
 
 	componentDidUpdate() {
@@ -129,7 +114,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
 		if (state) {
 			this.setState(state)
 		} else {
-			this.setState(defaultState())
+			this.setState(defaultState(this.props))
 		}
 	}
 
@@ -209,6 +194,7 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
 					decreaseFocusedMilestoneFn={this.shiftFocusedTrackMilestoneByDelta.bind(this, -1)}
 				/>
 				<Track
+					tracks={this.props.tracks}
 					milestoneByTrack={this.state.milestoneByTrack}
 					trackId={this.state.focusedTrackId}
 					handleTrackMilestoneChangeFn={(track, milestone) => this.handleTrackMilestoneChange(track, milestone)}
