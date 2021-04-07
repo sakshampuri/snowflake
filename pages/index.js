@@ -6,7 +6,7 @@ import initFirebase from '../services/firebase'
 initFirebase()
 
 const Snowflake = ({}) => (
-		<SnowflakeApp />
+		<h1>Please use your account through Nudge to access Snowflake</h1>
 )
 
 export default Snowflake;

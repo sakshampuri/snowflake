@@ -15,7 +15,8 @@
     "dev": "next",
     "export": "next build && next export",
     "flow": "flow",
-    "start": "next start -p $PORT"
+    "start": "next start -p $PORT",
+    "build": "next build"
   },
   "devDependencies": {
     "@babel/preset-flow": "^7.0.0",
