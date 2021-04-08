@@ -10,17 +10,20 @@ const UserSnowflake = ({ error, tracks, user }) => {
 
 	if (!user) {
 		return <h1>Your user does not exist in the Nudge project</h1>
-	}else if(!user.milestone){
-        return <h1>Your user does not have any snowflake data. Please ask admin to add.</h1>
-    }
+	} else if (!user.milestone) {
+		return (
+			<>
+				<img src={user.profile_pic} alt='profile pic' />
+				<h1>Hi {user.name}! Your user does not have any snowflake data. Please ask admin to add.</h1>
+			</>
+		)
+	}
 
-	return (
-			<SnowflakeApp userID={uid} {...{ tracks, user }} />
-	)
+	return <SnowflakeApp userID={uid} {...{ tracks, user }} />
 }
 
 UserSnowflake.getInitialProps = async ({ query }) => {
-    if(!firebase.apps.length) initFirebase();
+	if (!firebase.apps.length) initFirebase()
 	const { uid } = query
 
 	if (!uid) return { error: 'Invalid user' }
