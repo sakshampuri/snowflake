@@ -98,6 +98,9 @@ const stateToHash = (state: SnowflakeAppState) => {
 type Props = {}
 
 class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
+	pathURL: String
+	handleRefresh
+
 	constructor(props: Props) {
 		super(props)
 		this.state = emptyState()
@@ -106,11 +109,15 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
 
 	componentDidUpdate() {
 		const hash = stateToHash(this.state)
-		if (hash) window.location.replace(`#${hash}`)
+		//if (hash) window.location.replace(`#${hash}`)
 	}
 
 	componentDidMount() {
 		const state = hashToState(window.location.hash)
+		const url = new URL(window.location)
+		this.pathURL = url.origin + url.pathname
+		this.handleRefresh = () => window.location.replace(this.pathURL)
+
 		if (state) {
 			this.setState(state)
 		} else {
@@ -153,6 +160,9 @@ class SnowflakeApp extends React.Component<Props, SnowflakeAppState> {
 					<a href='https://theatom.app' target='_blank'>
 						<h1>Atom</h1>
 					</a>
+				</div>
+				<div onClick={() => this.setState(defaultState(this.props))}>
+					<a>Refresh</a>
 				</div>
 				<div style={{ display: 'flex' }}>
 					<div style={{ flex: 1 }}>
